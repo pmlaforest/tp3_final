@@ -27,12 +27,19 @@ class UserController extends AbstractActionController
     private $userManager;
     
     /**
+     * Auth service.
+     * @var Zend\Authentication\Authentication
+     */
+    private $authService;
+
+    /**
      * Constructor. 
      */
-    public function __construct($entityManager, $userManager)
+    public function __construct($entityManager, $userManager, $authService)
     {
         $this->entityManager = $entityManager;
         $this->userManager = $userManager;
+        $this->authService = $authService;
     }
     
     /**
@@ -41,6 +48,13 @@ class UserController extends AbstractActionController
      */
     public function indexAction() 
     {
+        //Minimum mesure of security
+        if ($this->authService->getIdentity() != "admin@example.com")
+        {
+            $this->getResponse()->setStatusCode(404);            
+            return;
+        }
+
         $users = $this->entityManager->getRepository(User::class)
                 ->findBy([], ['id'=>'ASC']);
         
@@ -54,6 +68,13 @@ class UserController extends AbstractActionController
      */
     public function addAction()
     {
+        //Minimum mesure of security
+        if ($this->authService->getIdentity() != "admin@example.com")
+        {
+            $this->getResponse()->setStatusCode(404);            
+            return;
+        }
+
         // Create user form
         $form = new UserForm('create', $this->entityManager);
         
@@ -90,6 +111,13 @@ class UserController extends AbstractActionController
      */
     public function viewAction() 
     {
+        //Minimum mesure of security
+        if ($this->authService->getIdentity() != "admin@example.com")
+        {
+            $this->getResponse()->setStatusCode(404);            
+            return;
+        }
+
         $id = (int)$this->params()->fromRoute('id', -1);
         if ($id<1) {
             $this->getResponse()->setStatusCode(404);
@@ -115,6 +143,13 @@ class UserController extends AbstractActionController
      */
     public function editAction() 
     {
+        //Minimum mesure of security
+        if ($this->authService->getIdentity() != "admin@example.com")
+        {
+            $this->getResponse()->setStatusCode(404);            
+            return;
+        }
+
         $id = (int)$this->params()->fromRoute('id', -1);
         if ($id<1) {
             $this->getResponse()->setStatusCode(404);
@@ -272,6 +307,7 @@ class UserController extends AbstractActionController
      */
     public function messageAction() 
     {
+        
         // Get message ID from route.
         $id = (string)$this->params()->fromRoute('id');
         

@@ -64,18 +64,19 @@ class NavManager
                 'float' => 'right'
             ];
         } else {
-            
-            $items[] = [
-                'id' => 'admin',
-                'label' => 'Admin',
-                'dropdown' => [
-                    [
-                        'id' => 'users',
-                        'label' => 'Manage Users',
-                        'link' => $url('users')
+            if ($this->authService->getIdentity() == "admin@example.com") {    
+                $items[] = [
+                    'id' => 'admin',
+                    'label' => 'Admin',
+                    'dropdown' => [
+                        [
+                            'id' => 'users',
+                            'label' => 'Manage Users',
+                            'link' => $url('users')
+                        ]
                     ]
-                ]
-            ];
+                ];
+            }
             
             $items[] = [
                 'id' => 'logout',
