@@ -1,17 +1,5 @@
 USE userdemo;
  
-
- INSERT INTO user(email, full_name, password, status, date_created, pwd_reset_token, pwd_reset_token_creation_date) VALUES
- (
-     'email4',
-     'pierre-marc laforest',
-     'password1',
-     1,
-     '1000-01-01 00:00:08',
-     'token1',
-     '1000-01-01 00:00:10'
- );
-
 INSERT INTO product(name, price, description, detailled_desc) VALUES 
 (
 'name1',

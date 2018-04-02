@@ -57,6 +57,12 @@ class NavManager
                 'link'  => $url('login'),
                 'float' => 'right'
             ];
+            $items[] = [
+                'id' => 'signup',
+                'label' => 'Sign up',
+                'link'  => $url('signup'),
+                'float' => 'right'
+            ];
         } else {
             
             $items[] = [

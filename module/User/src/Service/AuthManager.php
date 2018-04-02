@@ -2,7 +2,6 @@
 namespace User\Service;
 
 use Zend\Authentication\Result;
-
 /**
  * The AuthManager service is responsible for user's login/logout and simple access 
  * filtering. The access filtering feature checks whether the current visitor 
@@ -31,7 +30,7 @@ class AuthManager
     /**
      * Constructs the service.
      */
-    public function __construct($authService, $sessionManager, $config) 
+    public function __construct($authService, $userManager, $sessionManager, $config) 
     {
         $this->authService = $authService;
         $this->sessionManager = $sessionManager;

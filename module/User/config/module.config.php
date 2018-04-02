@@ -18,6 +18,16 @@ return [
                     ],
                 ],
             ],
+            'signup' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/signup',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'signup',
+                    ],
+                ],
+            ],
             'logout' => [
                 'type' => Literal::class,
                 'options' => [
